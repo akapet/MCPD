@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Vehicle.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="VehicleStoreContainer">
+    <EntitySet Name="Vehicles" EntityType="Vehicle.Store.Vehicles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Repairs" EntityType="Vehicle.Store.Repairs" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="VehicleRepairs" Association="Vehicle.Store.VehicleRepairs">
+      <End Role="Vehicle" EntitySet="Vehicles" />
+      <End Role="Repairs" EntitySet="Repairs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Vehicles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VIN" Type="nvarchar" Nullable="false" MaxLength="17" />
+    <Property Name="Make" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Model" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Year" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Repairs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Cost" Type="decimal" Nullable="false" />
+  </EntityType>
+  <Association Name="VehicleRepairs">
+    <End Role="Vehicle" Type="Vehicle.Store.Vehicles" Multiplicity="1" />
+    <End Role="Repairs" Type="Vehicle.Store.Repairs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Repairs">
+        <PropertyRef Name="VehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Vehicle" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="VehicleContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Vehicles" EntityType="Vehicle.Vehicle" />
+          <EntitySet Name="Repairs" EntityType="Vehicle.Repairs" />
+          <AssociationSet Name="VehicleRepairs" Association="Vehicle.VehicleRepairs">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Repairs" EntitySet="Repairs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="Fixed" />
+          <Property Type="String" Name="VIN" Nullable="false" MaxLength="17" ConcurrencyMode="Fixed" />
+          <Property Type="String" Name="Make" Nullable="false" MaxLength="20" ConcurrencyMode="Fixed" />
+          <Property Type="String" Name="Model" Nullable="false" MaxLength="20" ConcurrencyMode="Fixed" />
+          <Property Type="Int32" Name="Year" Nullable="false" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="Repairs" Relationship="Vehicle.VehicleRepairs" FromRole="Vehicle" ToRole="Repairs" />
+        </EntityType>
+        <EntityType Name="Repairs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="VehicleId" Nullable="false" ConcurrencyMode="Fixed" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" ConcurrencyMode="Fixed" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Vehicle" Relationship="Vehicle.VehicleRepairs" FromRole="Repairs" ToRole="Vehicle" />
+        </EntityType>
+        <Association Name="VehicleRepairs">
+          <End Type="Vehicle.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="Vehicle.Repairs" Role="Repairs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Repairs">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VehicleStoreContainer" CdmEntityContainer="VehicleContainer">
+    <EntitySetMapping Name="Vehicles">
+      <EntityTypeMapping TypeName="IsTypeOf(Vehicle.Vehicle)">
+        <MappingFragment StoreEntitySet="Vehicles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VIN" ColumnName="VIN" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Repairs">
+      <EntityTypeMapping TypeName="IsTypeOf(Vehicle.Repairs)">
+        <MappingFragment StoreEntitySet="Repairs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Vehicle" >
+        <EntityTypeShape EntityType="Vehicle.Vehicle" Width="1.5" PointX="3.125" PointY="1.875" Height="1.59568359375" />
+        <EntityTypeShape EntityType="Vehicle.Repairs" Width="1.5" PointX="6.75" PointY="2" Height="1.9802864583333339" />
+        <AssociationConnector Association="Vehicle.VehicleRepairs">
+          <ConnectorPoint PointX="4.625" PointY="2.9901432291666667" />
+          <ConnectorPoint PointX="6.75" PointY="2.9901432291666667" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

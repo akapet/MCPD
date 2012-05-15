@@ -18,7 +18,7 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("VehicleModel", "VehicleRepair", "Vehicle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(_70_516.Vehicle), "Repair", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(_70_516.Repair), true)]
+[assembly: EdmRelationshipAttribute("Vehicle", "VehicleRepairs", "Vehicle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(_70_516.Vehicle), "Repairs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(_70_516.Repairs), true)]
 
 #endregion
 
@@ -29,32 +29,32 @@ namespace _70_516
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class VehicleModelContainer : ObjectContext
+    public partial class VehicleContainer : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new VehicleModelContainer object using the connection string found in the 'VehicleModelContainer' section of the application configuration file.
+        /// Initializes a new VehicleContainer object using the connection string found in the 'VehicleContainer' section of the application configuration file.
         /// </summary>
-        public VehicleModelContainer() : base("name=VehicleModelContainer", "VehicleModelContainer")
+        public VehicleContainer() : base("name=VehicleContainer", "VehicleContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new VehicleModelContainer object.
+        /// Initialize a new VehicleContainer object.
         /// </summary>
-        public VehicleModelContainer(string connectionString) : base(connectionString, "VehicleModelContainer")
+        public VehicleContainer(string connectionString) : base(connectionString, "VehicleContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new VehicleModelContainer object.
+        /// Initialize a new VehicleContainer object.
         /// </summary>
-        public VehicleModelContainer(EntityConnection connection) : base(connection, "VehicleModelContainer")
+        public VehicleContainer(EntityConnection connection) : base(connection, "VehicleContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -89,18 +89,18 @@ namespace _70_516
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Repair> Repairs
+        public ObjectSet<Repairs> Repairs
         {
             get
             {
                 if ((_Repairs == null))
                 {
-                    _Repairs = base.CreateObjectSet<Repair>("Repairs");
+                    _Repairs = base.CreateObjectSet<Repairs>("Repairs");
                 }
                 return _Repairs;
             }
         }
-        private ObjectSet<Repair> _Repairs;
+        private ObjectSet<Repairs> _Repairs;
 
         #endregion
         #region AddTo Methods
@@ -116,9 +116,9 @@ namespace _70_516
         /// <summary>
         /// Deprecated Method for adding a new object to the Repairs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToRepairs(Repair repair)
+        public void AddToRepairs(Repairs repairs)
         {
-            base.AddObject("Repairs", repair);
+            base.AddObject("Repairs", repairs);
         }
 
         #endregion
@@ -132,28 +132,28 @@ namespace _70_516
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="VehicleModel", Name="Repair")]
+    [EdmEntityTypeAttribute(NamespaceName="Vehicle", Name="Repairs")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Repair : EntityObject
+    public partial class Repairs : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Repair object.
+        /// Create a new Repairs object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="vehicleId">Initial value of the VehicleId property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="cost">Initial value of the Cost property.</param>
-        public static Repair CreateRepair(global::System.Int32 id, global::System.Int32 vehicleId, global::System.String description, global::System.Decimal cost)
+        public static Repairs CreateRepairs(global::System.Int32 id, global::System.Int32 vehicleId, global::System.String description, global::System.Decimal cost)
         {
-            Repair repair = new Repair();
-            repair.Id = id;
-            repair.VehicleId = vehicleId;
-            repair.Description = description;
-            repair.Cost = cost;
-            return repair;
+            Repairs repairs = new Repairs();
+            repairs.Id = id;
+            repairs.VehicleId = vehicleId;
+            repairs.Description = description;
+            repairs.Cost = cost;
+            return repairs;
         }
 
         #endregion
@@ -268,16 +268,16 @@ namespace _70_516
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VehicleModel", "VehicleRepair", "Vehicle")]
+        [EdmRelationshipNavigationPropertyAttribute("Vehicle", "VehicleRepairs", "Vehicle")]
         public Vehicle Vehicle
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Vehicle>("VehicleModel.VehicleRepair", "Vehicle").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Vehicle>("Vehicle.VehicleRepairs", "Vehicle").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Vehicle>("VehicleModel.VehicleRepair", "Vehicle").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Vehicle>("Vehicle.VehicleRepairs", "Vehicle").Value = value;
             }
         }
         /// <summary>
@@ -289,13 +289,13 @@ namespace _70_516
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Vehicle>("VehicleModel.VehicleRepair", "Vehicle");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Vehicle>("Vehicle.VehicleRepairs", "Vehicle");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Vehicle>("VehicleModel.VehicleRepair", "Vehicle", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Vehicle>("Vehicle.VehicleRepairs", "Vehicle", value);
                 }
             }
         }
@@ -306,7 +306,7 @@ namespace _70_516
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="VehicleModel", Name="Vehicle")]
+    [EdmEntityTypeAttribute(NamespaceName="Vehicle", Name="Vehicle")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Vehicle : EntityObject
@@ -468,18 +468,18 @@ namespace _70_516
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VehicleModel", "VehicleRepair", "Repair")]
-        public EntityCollection<Repair> Repairs
+        [EdmRelationshipNavigationPropertyAttribute("Vehicle", "VehicleRepairs", "Repairs")]
+        public EntityCollection<Repairs> Repairs
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Repair>("VehicleModel.VehicleRepair", "Repair");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Repairs>("Vehicle.VehicleRepairs", "Repairs");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Repair>("VehicleModel.VehicleRepair", "Repair", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Repairs>("Vehicle.VehicleRepairs", "Repairs", value);
                 }
             }
         }

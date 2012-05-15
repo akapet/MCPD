@@ -45,20 +45,21 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VehicleModel.Designer.cs">
+    <Compile Include="Vehicle.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VehicleModel.edmx</DependentUpon>
+      <DependentUpon>Vehicle.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="VehicleModel.edmx">
+    <None Include="App.Config" />
+    <EntityDeploy Include="Vehicle.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>VehicleModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Vehicle.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <Content Include="Vehicle.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
