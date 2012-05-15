@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="VehicleModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="VehicleModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="VehicleModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="VehicleModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Vehicles" EntityType="VehicleModel.Vehicle" />
+          <EntitySet Name="Repairs" EntityType="VehicleModel.Repair" />
+          <AssociationSet Name="VehicleRepair" Association="VehicleModel.VehicleRepair">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Repair" EntitySet="Repairs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="Fixed" />
+          <Property Type="String" Name="VIN" Nullable="false" ConcurrencyMode="Fixed" MaxLength="17" />
+          <Property Type="String" Name="Make" Nullable="false" MaxLength="20" ConcurrencyMode="Fixed" />
+          <Property Type="String" Name="Model" Nullable="false" MaxLength="20" ConcurrencyMode="Fixed" />
+          <Property Type="Int32" Name="Year" Nullable="false" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Repairs" Relationship="VehicleModel.VehicleRepair" FromRole="Vehicle" ToRole="Repair" />
+        </EntityType>
+        <EntityType Name="Repair">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="Fixed" />
+          <Property Type="Int32" Name="VehicleId" Nullable="false" ConcurrencyMode="Fixed" />
+          <Property Type="String" Name="Description" Nullable="false" ConcurrencyMode="Fixed" MaxLength="100" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Vehicle" Relationship="VehicleModel.VehicleRepair" FromRole="Repair" ToRole="Vehicle" />
+        </EntityType>
+        <Association Name="VehicleRepair">
+          <End Type="VehicleModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="VehicleModel.Repair" Role="Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Repair">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="VehicleModel" />
+        <Alias Key="Target" Value="VehicleModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="VehicleModelContainer" StorageEntityContainer="VehicleModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="VehicleModel" >
+        <EntityTypeShape EntityType="VehicleModel.Vehicle" Width="1.5" PointX="2.75" PointY="1.875" Height="1.4033821614583331" />
+        <EntityTypeShape EntityType="VehicleModel.Repair" Width="1.5" PointX="5.5" PointY="2.125" Height="1.787985026041667" />
+        <AssociationConnector Association="VehicleModel.VehicleRepair">
+          <ConnectorPoint PointX="4.25" PointY="3.0862939453125" />
+          <ConnectorPoint PointX="5.5" PointY="3.0862939453125" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
