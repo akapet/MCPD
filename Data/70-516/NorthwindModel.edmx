@@ -874,7 +874,7 @@
     <Diagrams>
       <Diagram Name="NorthwindModel">
         <EntityTypeShape EntityType="NorthwindModel.Category" Width="1.5" PointX="3" PointY="19.5" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="NorthwindModel.CustomerDemographic" Width="1.5" PointX="0.75" PointY="2.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="NorthwindModel.CustomerDemographic" Width="2.125" PointX="0.5" PointY="2.5" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Customer" Width="1.5" PointX="3" PointY="1.5" Height="3.5186979166666656" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Employee" Width="1.5" PointX="3" PointY="9.25" Height="5.2494108072916674" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Order_Detail" Width="1.5" PointX="7.5" PointY="2.125" Height="2.3648893229166656" IsExpanded="true" />
@@ -931,7 +931,7 @@
           <ConnectorPoint PointX="8" PointY="10.865143229166668" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.CustomerCustomerDemo" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="3.297841796875" />
+          <ConnectorPoint PointX="2.625" PointY="3.297841796875" />
           <ConnectorPoint PointX="3" PointY="3.297841796875" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.EmployeeTerritories" ManuallyRouted="false">

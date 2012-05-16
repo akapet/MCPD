@@ -3,16 +3,38 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "70-516\Data.csproj", "{523945FE-E819-41C2-A025-227E4B769CD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{DB152636-E26E-4205-A4DE-622B78DDEB08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{523945FE-E819-41C2-A025-227E4B769CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{523945FE-E819-41C2-A025-227E4B769CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{523945FE-E819-41C2-A025-227E4B769CD9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{523945FE-E819-41C2-A025-227E4B769CD9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{523945FE-E819-41C2-A025-227E4B769CD9}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{523945FE-E819-41C2-A025-227E4B769CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{523945FE-E819-41C2-A025-227E4B769CD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{523945FE-E819-41C2-A025-227E4B769CD9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{523945FE-E819-41C2-A025-227E4B769CD9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{523945FE-E819-41C2-A025-227E4B769CD9}.Release|x86.ActiveCfg = Release|Any CPU
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Debug|x86.ActiveCfg = Debug|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Debug|x86.Build.0 = Debug|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Release|Any CPU.ActiveCfg = Release|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Release|Mixed Platforms.Build.0 = Release|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Release|x86.ActiveCfg = Release|x86
+		{DB152636-E26E-4205-A4DE-622B78DDEB08}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

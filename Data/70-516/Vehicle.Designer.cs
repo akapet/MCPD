@@ -38,7 +38,7 @@ namespace _70_516
         /// </summary>
         public VehicleContainer() : base("name=VehicleContainer", "VehicleContainer")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            this.ContextOptions.LazyLoadingEnabled = false;
             OnContextCreated();
         }
     
@@ -47,7 +47,7 @@ namespace _70_516
         /// </summary>
         public VehicleContainer(string connectionString) : base(connectionString, "VehicleContainer")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            this.ContextOptions.LazyLoadingEnabled = false;
             OnContextCreated();
         }
     
@@ -56,7 +56,7 @@ namespace _70_516
         /// </summary>
         public VehicleContainer(EntityConnection connection) : base(connection, "VehicleContainer")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            this.ContextOptions.LazyLoadingEnabled = false;
             OnContextCreated();
         }
     
