@@ -136,10 +136,10 @@
     <edmx:Diagrams>
       <Diagram Name="Vehicle" >
         <EntityTypeShape EntityType="Vehicle.Vehicle" Width="1.5" PointX="3.125" PointY="1.875" Height="1.59568359375" />
-        <EntityTypeShape EntityType="Vehicle.Repairs" Width="1.5" PointX="6.75" PointY="2" Height="1.9802864583333339" />
+        <EntityTypeShape EntityType="Vehicle.Repairs" Width="1.5" PointX="6.125" PointY="1.875" Height="1.9802864583333339" />
         <AssociationConnector Association="Vehicle.VehicleRepairs">
-          <ConnectorPoint PointX="4.625" PointY="2.9901432291666667" />
-          <ConnectorPoint PointX="6.75" PointY="2.9901432291666667" />
+          <ConnectorPoint PointX="4.625" PointY="2.8651432291666667" />
+          <ConnectorPoint PointX="6.125" PointY="2.8651432291666667" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
