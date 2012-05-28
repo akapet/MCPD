@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NorthwindModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="NorthwindModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="NorthwindModelStoreContainer">
           <EntitySet Name="Categories" EntityType="NorthwindModel.Store.Categories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CustomerCustomerDemo" EntityType="NorthwindModel.Store.CustomerCustomerDemo" store:Type="Tables" Schema="dbo" />
@@ -384,8 +384,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+        <Function Name="CustOrderHist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="CustOrdersDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CustOrdersOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="Employee_Sales_by_Country" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="Employee Sales by Country" Schema="dbo">
+          <Parameter Name="Beginning_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Ending_Date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Sales_by_Year" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="Sales by Year" Schema="dbo">
+          <Parameter Name="Beginning_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Ending_Date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SalesByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryName" Type="nvarchar" Mode="In" />
+          <Parameter Name="OrdYear" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Ten_Most_Expensive_Products" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="Ten Most Expensive Products" Schema="dbo" />
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NorthwindModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -445,6 +466,12 @@
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Territories" EntitySet="Territories" />
           </AssociationSet>
+          <FunctionImport Name="CustOrderHist">
+            <Parameter Name="CustomerID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CustOrdersDetail">
+            <Parameter Name="OrderID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -852,6 +879,8 @@
               <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="CustOrderHist" FunctionName="NorthwindModel.Store.CustOrderHist" />
+          <FunctionImportMapping FunctionImportName="CustOrdersDetail" FunctionName="NorthwindModel.Store.CustOrdersDetail" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -868,6 +897,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
@@ -875,10 +905,10 @@
       <Diagram Name="NorthwindModel">
         <EntityTypeShape EntityType="NorthwindModel.Category" Width="1.5" PointX="3" PointY="19.5" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.CustomerDemographic" Width="2.125" PointX="0.5" PointY="2.5" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="NorthwindModel.Customer" Width="1.5" PointX="3" PointY="1.5" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="NorthwindModel.Customer" Width="1.875" PointX="3.25" PointY="1.5" Height="3.5186979166666656" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Employee" Width="1.5" PointX="3" PointY="9.25" Height="5.2494108072916674" IsExpanded="true" />
-        <EntityTypeShape EntityType="NorthwindModel.Order_Detail" Width="1.5" PointX="7.5" PointY="2.125" Height="2.3648893229166656" IsExpanded="true" />
-        <EntityTypeShape EntityType="NorthwindModel.Order" Width="1.5" PointX="5.25" PointY="1" Height="4.4802050781250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="NorthwindModel.Order_Detail" Width="1.5" PointX="8.25" PointY="2.25" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="NorthwindModel.Order" Width="1.5" PointX="6" PointY="1.125" Height="4.4802050781250031" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Product" Width="1.5" PointX="5.25" PointY="20.875" Height="3.5186979166666674" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Region" Width="1.5" PointX="5.75" PointY="7.125" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="NorthwindModel.Shipper" Width="1.5" PointX="3" PointY="15.25" Height="1.7879850260416674" IsExpanded="true" />
@@ -889,8 +919,8 @@
           <ConnectorPoint PointX="5.25" PointY="21.177643229166666" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.FK_Orders_Customers" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="3.2593489583333328" />
-          <ConnectorPoint PointX="5.25" PointY="3.2593489583333328" />
+          <ConnectorPoint PointX="5.125" PointY="3.2593489583333328" />
+          <ConnectorPoint PointX="6" PointY="3.2593489583333328" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.FK_Employees_Employees" ManuallyRouted="false">
           <ConnectorPoint PointX="3.5319230769230767" PointY="14.499410807291667" />
@@ -899,25 +929,23 @@
           <ConnectorPoint PointX="3.9784615384615383" PointY="14.499410807291667" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.FK_Orders_Employees" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="11.874705403645834" />
-          <ConnectorPoint PointX="5.2447891666666671" PointY="11.874705403645834" />
-          <ConnectorPoint PointX="5.4114558333333331" PointY="11.874705403645834" />
-          <ConnectorPoint PointX="5.46875" PointY="11.874705403645834" />
-          <ConnectorPoint PointX="5.46875" PointY="5.4802050781250031" />
+          <ConnectorPoint PointX="4.5" PointY="12.682277018229168" />
+          <ConnectorPoint PointX="7.40625" PointY="12.682277018229168" />
+          <ConnectorPoint PointX="7.40625" PointY="5.6052050781250031" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.FK_Order_Details_Orders" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="3.3074446614583328" />
-          <ConnectorPoint PointX="7.5" PointY="3.3074446614583328" />
+          <ConnectorPoint PointX="7.5" PointY="3.4324446614583328" />
+          <ConnectorPoint PointX="8.25" PointY="3.4324446614583328" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.FK_Order_Details_Products" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="22.634348958333334" />
-          <ConnectorPoint PointX="7.71875" PointY="22.634348958333334" />
-          <ConnectorPoint PointX="7.71875" PointY="4.4898893229166656" />
+          <ConnectorPoint PointX="9.65625" PointY="22.634348958333334" />
+          <ConnectorPoint PointX="9.65625" PointY="4.6148893229166656" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.FK_Orders_Shippers" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="16.143992513020834" />
-          <ConnectorPoint PointX="5.3281225" PointY="16.143992513020834" />
-          <ConnectorPoint PointX="5.3281225" PointY="5.4802050781250031" />
+          <ConnectorPoint PointX="7.3749975" PointY="16.143992513020834" />
+          <ConnectorPoint PointX="7.3749975" PointY="5.6052050781250031" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.FK_Products_Suppliers" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="23.321848958333334" />
@@ -926,22 +954,20 @@
         <AssociationConnector Association="NorthwindModel.FK_Territories_Region" ManuallyRouted="false">
           <ConnectorPoint PointX="6.5" PointY="8.72068359375" />
           <ConnectorPoint PointX="6.5" PointY="10.865143229166668" />
-          <ConnectorPoint PointX="7.635416666666667" PointY="10.865143229166668" />
-          <ConnectorPoint PointX="7.802083333333333" PointY="10.865143229166668" />
+          <ConnectorPoint PointX="7.2916641666666671" PointY="10.865143229166668" />
+          <ConnectorPoint PointX="7.4895833333333321" PointY="10.865143229166668" />
           <ConnectorPoint PointX="8" PointY="10.865143229166668" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.CustomerCustomerDemo" ManuallyRouted="false">
           <ConnectorPoint PointX="2.625" PointY="3.297841796875" />
-          <ConnectorPoint PointX="3" PointY="3.297841796875" />
+          <ConnectorPoint PointX="3.25" PointY="3.297841796875" />
         </AssociationConnector>
         <AssociationConnector Association="NorthwindModel.EmployeeTerritories" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="10.307571614583335" />
-          <ConnectorPoint PointX="5.2447891666666671" PointY="10.307571614583333" />
-          <ConnectorPoint PointX="5.5520833333333321" PointY="10.307571614583335" />
           <ConnectorPoint PointX="6.416666666666667" PointY="10.307571614583335" />
           <ConnectorPoint PointX="6.583333333333333" PointY="10.307571614583335" />
-          <ConnectorPoint PointX="7.635416666666667" PointY="10.307571614583335" />
-          <ConnectorPoint PointX="7.802083333333333" PointY="10.307571614583335" />
+          <ConnectorPoint PointX="7.2916641666666671" PointY="10.307571614583335" />
+          <ConnectorPoint PointX="7.4895833333333321" PointY="10.307571614583335" />
           <ConnectorPoint PointX="8" PointY="10.307571614583335" />
         </AssociationConnector>
       </Diagram>

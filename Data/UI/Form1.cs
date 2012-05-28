@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using _70_516;
 using System.Diagnostics;
+using EFCode.TablePerHierarchy;
 
 namespace UI
 {
@@ -20,6 +21,11 @@ namespace UI
         }
         private void stToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var d = new NorthwindEntities();
+            Customer c = null;
+            c.StartTracking();
+            c.StopTracking();
+
             var db = new NorthwindEntities();
             gv.DataSource = (from c in db.Customers
                              select new
@@ -58,6 +64,53 @@ namespace UI
             gv.DataSource = order.Order_Details.ToList();
         }
 
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void executeStoredProcedureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var db = new NorthwindEntities();
+            gv.DataSource = db.CustOrderHist("ALFKI");
+        }
+
+        private void orderDetailsWoCustomMethodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           var db = new NorthwindEntities();
+            gv.DataSource = (from od in db.Order_Details.AsEnumerable()
+            where od.Order.CustomerID == "ALFKI"
+            select new
+            {
+                od.OrderID,
+                od.ProductID,
+                od.Quantity,
+                od.Discount,
+                DetailTotal = (1 - (decimal)od.Discount) * (od.Quantity * od.UnitPrice)
+            }).ToList();
+        }
+
+        private void orderDetailsWithCustomMethodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var db = new NorthwindEntities();
+            gv.DataSource = (from od in db.Order_Details.AsEnumerable()
+                             where od.Order.CustomerID == "ALFKI"
+                             select new
+                             {
+                                 od.OrderID,
+                                 od.ProductID,
+                                 od.Quantity,
+                                 od.Discount,
+                                 od.DetailTotal,
+                             }).ToList();
+        }
+
+        private void tPHDisplayCarsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var db = new VehicleRepairsEntities();
+            gv.DataSource = (from c in db.Vehicles.OfType<Car>()
+                             select c).ToList();
+        }
        
     }
 }

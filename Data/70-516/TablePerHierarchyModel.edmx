@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VehicleRepairsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="VehicleRepairsModelStoreContainer">
+          <EntitySet Name="Vehicles" EntityType="VehicleRepairsModel.Store.Vehicles" store:Type="Tables" store:Schema="dbo" store:Name="Vehicles">
+            <DefiningQuery>SELECT 
+      [Vehicles].[Id] AS [Id], 
+      [Vehicles].[Type] AS [Type], 
+      [Vehicles].[Vin] AS [Vin], 
+      [Vehicles].[Make] AS [Make], 
+      [Vehicles].[Model] AS [Model], 
+      [Vehicles].[Year] AS [Year], 
+      [Vehicles].[TireSize] AS [TireSize], 
+      [Vehicles].[PropSize] AS [PropSize]
+      FROM [dbo].[Vehicles] AS [Vehicles]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'VehicleRepairs.dbo.Vehicles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Vin" Type="char" Nullable="false" MaxLength="17" />
+          <Property Name="Make" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Model" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="TireSize" Type="varchar" MaxLength="50" />
+          <Property Name="PropSize" Type="varchar" MaxLength="50" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VehicleRepairsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="VehicleRepairsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Vehicles" EntityType="VehicleRepairsModel.Vehicle" />
+        </EntityContainer>
+        <EntityType Name="Vehicle" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Vin" Nullable="false" MaxLength="17" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Make" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="Model" Nullable="false" MaxLength="50" FixedLength="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Car" BaseType="VehicleRepairsModel.Vehicle" >
+          <Property Type="String" Name="TireSize" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Boat" BaseType="VehicleRepairsModel.Vehicle" >
+          <Property Type="String" Name="PropSize" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VehicleRepairsModelStoreContainer" CdmEntityContainer="VehicleRepairsEntities">
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="IsTypeOf(VehicleRepairsModel.Vehicle)">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Vin" ColumnName="Vin" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(VehicleRepairsModel.Car)">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TireSize" ColumnName="TireSize" />
+                <Condition ColumnName="Type" Value="Car" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(VehicleRepairsModel.Boat)">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PropSize" ColumnName="PropSize" />
+                <Condition ColumnName="Type" Value="Boat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TablePerHierarchyModel">
+        <EntityTypeShape EntityType="VehicleRepairsModel.Vehicle" Width="1.5" PointX="1.875" PointY="0.875" Height="1.9802864583333331" />
+        <EntityTypeShape EntityType="VehicleRepairsModel.Car" Width="1.5" PointX="0.75" PointY="4.25" Height="1.038779296875" />
+        <InheritanceConnector EntityType="VehicleRepairsModel.Car" >
+          <ConnectorPoint PointX="2.625" PointY="2.8552864583333331" />
+          <ConnectorPoint PointX="2.625" PointY="3.875" />
+          <ConnectorPoint PointX="1.5" PointY="3.875" />
+          <ConnectorPoint PointX="1.5" PointY="4.25" />
+        </InheritanceConnector>
+        <EntityTypeShape EntityType="VehicleRepairsModel.Boat" Width="1.5" PointX="4.125" PointY="4.125" Height="1.0187792968749996" />
+        <InheritanceConnector EntityType="VehicleRepairsModel.Boat" >
+          <ConnectorPoint PointX="2.625" PointY="2.8552864583333331" />
+          <ConnectorPoint PointX="2.625" PointY="3.75" />
+          <ConnectorPoint PointX="4.875" PointY="3.75" />
+          <ConnectorPoint PointX="4.875" PointY="4.125" />
+        </InheritanceConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
