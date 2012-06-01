@@ -129,6 +129,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NorthwindSTE.cs</LastGenOutput>
     </None>
+    <None Include="Properties\DataSources\EFCode.TablePerHierarchy.VehicleRepairsEntities.datasource" />
     <None Include="Properties\DataSources\NorthwindEntities.datasource" />
     <None Include="Properties\DataSources\VehicleContainer.datasource" />
     <EntityDeploy Include="TablePerHierarchyModel.edmx">
